@@ -1,0 +1,16 @@
+# RubyGem 淘宝已经移交给Ruby China维护
+# 地址为 https://gems.ruby-china.com/
+source "https://gems.ruby-china.com/"
+# 官方源 被墙
+# source "https://rubygems.org"
+
+gem "fastlane"
+gem "mail"
+
+# 新版 AFastlane
+# 支持的插件明显变多了, 很多东西不用自己实现
+# 尽量配合teamcity, 调用其他功能
+# gem "cocoapods"
+# gem "mail"
+# gem "fir-cli"
+# gem "jazzy"

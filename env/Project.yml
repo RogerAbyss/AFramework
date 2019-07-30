@@ -1,0 +1,142 @@
+# Project
+# ===========================
+## replace ${ProjectName}
+## replace dependencies
+## replace teamid
+## custom configs
+## custom teamid
+## set identifier
+## whether init CURRENT_PROJECT_VERSION to 1.0.0
+## 暂时没找到合适的办法解决版本号回退问题, 手动处理info.plist吧
+# ============================
+# include:
+#     - path: path/to/other.yml
+#       relativePaths: false
+name: Strawberry
+options:
+    # TODO: 设置默认bundleID
+    minimumXcodeGenVersion: 2.5.0
+    bundleIdPrefix: "com.abyss.chao"
+    deploymentTarget: "10.0"
+configs:
+    Debug: debug
+    Enterprise: debug
+    Adhoc: debug
+    AppStore: release
+settingGroups:
+    base:
+        ENABLE_BITCODE: NO
+        DEBUG: YES
+        # 编译时间分析
+        OTHER_SWIFT_FLAGS: "$(inherited) \
+        -driver-time-compilation \
+        -Xfrontend -debug-time-function-bodies \
+        -Xfrontend -debug-time-compilation"
+        # 版本号自动提升
+        # VERSIONING_SYSTEM: Apple Generic
+        # CURRENT_PROJECT_VERSION: 1.0.0
+    app:
+        # 证书加载方式 Manual/Automatic
+        CODE_SIGN_STYLE: Automatic
+        # FASTLANE: 
+        # DEVELOPMENT_TEAM: Y78NU4698P
+
+
+targets:
+    Strawberry:
+        deploymentTarget: "10.0"
+        type: application
+        # platform: [iOS, tvOS]
+        platform: iOS
+        sources:
+            - Resources
+            - Strawberry
+            - OpenSources
+        dependencies:
+            - target: AFramework
+            # - carthage: 
+            #   findFrameworks: false
+            # - target: 
+            # - framework: 
+            # - sdk: 
+        settings:
+            # only iphone
+            groups: [app, base]
+            base:
+                TARGETED_DEVICE_FAMILY: 1
+                INFOPLIST_FILE: Strawberry/Core/Info.plist
+                SWIFT_OBJC_BRIDGING_HEADER: $(SRCROOT)/Strawberry/Core/Bridge-Header.h
+                # FASTLANE: 
+                # APP_IDENTIFIER: some
+                # DEVELOPMENT_TEAM: XX
+            configs:
+                # TODO: 完善host信息, 启动时候的默认host
+                Debug:
+                    APP_HOST: http://47.105.202.72/drt
+                Adhoc:
+                    APP_HOST: http://app.togcm.com/drt
+                Enterprise:
+                    APP_HOST: http://app.togcm.com/drt
+                AppStore:
+                    DEBUG: NO
+                    OTHER_SWIFT_FLAGS: "$(inherited)"
+                    APP_HOST: http://app.togcm.com/drt
+        # entitlements:
+            # CODE_SIGN_ENTITLEMENTS:
+        scheme:
+            gatherCoverageData: true
+            environmentVariables:
+                # 启动时间分析
+                - variable: DYLD_PRINT_STATISTICS
+                  value: YES
+                  isEnabled: true
+                # 打印信息清理, 造成崩溃没有日志
+                # - variable: OS_ACTIVITY_MODE
+                #   value: disable
+                #   isEnabled: true
+    AFramework:
+        type: framework
+        platform: iOS
+        deploymentTarget: "10.0"
+        sources:
+            - AFramework/AFramework
+        dependencies:
+            - carthage: MJRefresh
+            - carthage: IQKeyboardManagerSwift
+            - carthage: SwiftyJSON
+            - carthage: SwiftyBeaver
+            - carthage: Kingfisher
+            - carthage: CryptoSwift
+            - carthage: HandyJSON
+            - carthage: SVProgressHUD
+            - carthage: Yams
+            - carthage: Cache
+            - carthage: Localize_Swift
+            - carthage: SwifterSwift
+            - carthage: SnapKit
+            - carthage: Alamofire
+            - carthage: FSPagerView
+            - carthage: Segmentio
+            - carthage: SwiftyUserDefaults
+            - carthage: SwiftyRSA
+
+        settings:
+            groups: [base]
+            configs: 
+                AppStore: 
+                    DEBUG: NO
+                    OTHER_SWIFT_FLAGS: "$(inherited)"
+
+    AFramework-Tests:
+        type: bundle.unit-test
+        platform: iOS
+        sources:
+            - AFramework/AFramework-Tests
+        dependencies:
+            - target: AFramework
+            - carthage: Quick
+            - carthage: Nimble
+        scheme:
+            testTargets:
+                - AFramework-Tests
+            gatherCoverageData: true

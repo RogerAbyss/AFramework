@@ -1,0 +1,96 @@
+# Carthage
+
+# Quick
+# 测试框架
+# https://github.com/Quick/Quick/releases
+github "Quick/Quick"
+github "Quick/Nimble"
+
+# Alamofire
+# 基础网络框架
+# https://github.com/Alamofire/Alamofire/releases
+# github "Alamofire/Alamofire" ~> 5.0.0-beta.5
+
+# MJRefresh
+# 列表刷新控件
+# https://github.com/CoderMJLee/MJRefresh/releases
+github "CoderMJLee/MJRefresh" "3.1.15.6"
+
+# SwiftyBeaver
+# 控制台美化
+# https://github.com/SwiftyBeaver/SwiftyBeaver/releases
+github "SwiftyBeaver/SwiftyBeaver" ~> 1.7.0
+
+# IQKeyboardManager
+# 键盘管理
+# https://github.com/hackiftekhar/IQKeyboardManager/releases
+github "hackiftekhar/IQKeyboardManager" ~> 6.2.1
+
+# SwiftyJSON
+# JSON处理
+# https://github.com/SwiftyJSON/SwiftyJSON/releases
+github "SwiftyJSON/SwiftyJSON" ~> 5.0.0
+
+# HandyJSON
+# JSON序列化 [bitcode:false]
+# https://github.com/alibaba/HandyJSON/releases
+github "alibaba/HandyJSON" ~> 5.0.0-beta.1
+
+# Kingfisher
+# 网络图片加载与缓存
+# https://github.com/onevcat/Kingfisher/releases
+github "onevcat/Kingfisher" ~> 5.3.1
+
+# CryptoSwift
+# 加解密
+# https://github.com/krzyzanowskim/CryptoSwift/releases
+github "krzyzanowskim/CryptoSwift" ~> 1.0.0
+
+# SVProgressHUD
+# HUD
+# https://github.com/SVProgressHUD/SVProgressHUD/releases
+github "SVProgressHUD/SVProgressHUD" ~> 2.2.5
+
+# yaml解析器
+# https://github.com/jpsim/Yams
+github "jpsim/Yams" ~> 2.0.0
+
+# Cache
+# https://github.com/hyperoslo/Cache#storage-observations
+github "hyperoslo/Cache" ~> 5.2.0
+
+# Localize-Swift
+# https://github.com/marmelroy/Localize-Swift
+github "marmelroy/Localize-Swift" ~> 2.0
+
+# SwifterSwift
+# https://github.com/SwifterSwift/SwifterSwift
+github "SwifterSwift/SwifterSwift" ~> 5.0
+
+# SnapKit
+# https://github.com/SnapKit/SnapKit
+github "SnapKit/SnapKit" ~> 5.0.0
+
+# Moya
+# 网路抽象层
+# Alamofire
+# Result
+# RxSwift
+# https://github.com/Moya/Moya/releases
+# github "Moya/Moya" ~> 13.0.0
+
+# Segmentio
+# https://github.com/Yalantis/Segmentio
+github "Yalantis/Segmentio" ~> 3.3
+
+# FSPagerView
+# https://github.com/WenchaoD/FSPagerView/
+github "WenchaoD/FSPagerView" ~> 0.8.2
+
+# SwiftyUserDefaults
+# https://github.com/radex/SwiftyUserDefaults
+github "radex/SwiftyUserDefaults" ~> 4.0
+
+# SwiftyRSA
+# https://github.com/TakeScoop/SwiftyRSA
+github "TakeScoop/SwiftyRSA" ~> 1.5.0
