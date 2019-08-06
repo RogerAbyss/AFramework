@@ -15,9 +15,7 @@ final public class NetworkPluginHud: PluginType {
         log.debug("🚀 Netwrok插件-Hud 开启")
     }
     
-    public func process(_ result: Result<Response, MoyaError>, target: TargetType) -> Result<Response, MoyaError> {
-        guard logEnable == true else { return result }
-        
+    public func process(_ result: Result<Response, MoyaError>, target: TargetType) -> Result<Response, MoyaError> {        
         switch result {
         case .success(let response):
             if 200..<400 ~= response.statusCode {
