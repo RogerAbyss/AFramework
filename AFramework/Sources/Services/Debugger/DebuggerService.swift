@@ -14,9 +14,7 @@ import DoraemonKit
 
 public class DebuggerService {
     static public func setup() {
-        
         #if DEBUG
-        
         DoraemonManager.shareInstance().addPlugin(withTitle: "环境切换",
                                                   icon: "doraemon_default",
                                                   desc: "用于app内部环境切换功能",
@@ -84,39 +82,6 @@ public class DebuggerService {
                 
                 NotificationSercice.shared.send(.发现更新)
         })
-        
-//        DoraemonManager.shareInstance().addPlugin(withTitle: "国家代码",
-//                                                  icon: "doraemon_default",
-//                                                  desc: "国家代码",
-//                                                  pluginName: "DoraemonRichPlugin",
-//                                                  atModule: "业务专区",
-//                                                  handle:
-//            { data in
-//                log.debug("🧪 DoraemonKit 测试")
-//                DoraemonManager.shareInstance().hiddenHomeWindow()
-//
-//                JumperUtil.jumpTo(storyboard: "CountryCode", identifier: "CountryCodeViewController")
-//        })
-//
-//        DoraemonManager.shareInstance().install()
-//        log.debug("🧪 DoraemonKit 测试工具开启")
-        
-        DoraemonManager.shareInstance().addPlugin(withTitle: "零售中心",
-                                                  icon: "doraemon_default",
-                                                  desc: "零售中心",
-                                                  pluginName: "DoraemonRichPlugin",
-                                                  atModule: "业务专区",
-                                                  handle:
-            { data in
-                log.debug("🧪 DoraemonKit 测试")
-                DoraemonManager.shareInstance().hiddenHomeWindow()
-                
-                JumperUtil.jumpTo(storyboard: "Wholesale", identifier: "WholesaleViewController")
-        })
-        
-        DoraemonManager.shareInstance().install()
-        log.debug("🧪 DoraemonKit 测试工具开启")
-        
         #endif
     }
     
