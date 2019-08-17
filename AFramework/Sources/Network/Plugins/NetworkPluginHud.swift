@@ -38,7 +38,8 @@ final public class NetworkPluginHud: PluginType {
             }
             
             break
-        case .failure(_):
+        case .failure(let error):
+            Hud.show(type: .error, text: error.errorDescription ?? "")
             break
         }
         
