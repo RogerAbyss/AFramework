@@ -39,7 +39,10 @@ final public class NetworkPluginHud: PluginType {
             
             break
         case .failure(let error):
-            Hud.show(type: .error, text: error.errorDescription ?? "")
+            if error.errorCode == 404 {
+                Hud.show(type: .error, text: error.errorDescription ?? "")
+            }
+            
             break
         }
         
