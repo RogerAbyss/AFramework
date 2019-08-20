@@ -17,6 +17,7 @@ public struct AConfig: Codable {
     public var mode: ModeConfig
     public var style: StyleConfig
     public var hosts: [NetworkHost]
+    public var testList: [Tester]
     
     static public func load() -> AConfig {
         
@@ -85,6 +86,10 @@ public struct AConfig: Codable {
                     name: "服务器",
                     host: "https://example"
                 )
+            ],
+            testList: [
+                Tester(name: "测试账号",
+                       mobile: "17723547371")
             ]
         )
     }
@@ -161,6 +166,12 @@ public struct NetworkHost: Codable {
     public var name: String
     public var host: String
 }
+
+public struct Tester: Codable {
+    public var name: String
+    public var mobile: String
+}
+
 
 public struct SSLConfig: Codable {
     public var ssl_enable: Bool
