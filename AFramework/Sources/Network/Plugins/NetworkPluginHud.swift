@@ -39,8 +39,8 @@ final public class NetworkPluginHud: PluginType {
             
             break
         case .failure(let error):
-            if error.errorCode == 404 {
-                Hud.show(type: .error, text: error.errorDescription ?? "服务器开小差了")
+            if error.errorCode == 404 || error.errorCode == 500 {
+                Hud.show(type: .error, text: error.errorDescription ?? "服务器开小差了[\(error.errorCode)]")
             }
             
             break
