@@ -19,6 +19,8 @@ public extension DefaultsKeys {
     static let appAccount = DefaultsKey<Bool>("__appAccount", defaultValue: false)
     /** 是否使用生物认证 */
     static let appBio = DefaultsKey<Bool>("__appBio", defaultValue: false)
+    /** uuid */
+    static let uuid = DefaultsKey<String>("__uuid", defaultValue: "")
 }
 
 public class DefaultsUtil {
