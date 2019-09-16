@@ -54,9 +54,13 @@ public extension String {
     }
     
     func aes_decrypt() -> String {
-        let result = try! Security.aes().decrypt(Array<UInt8>(hex: self))
+        if let result = try? Security.aes().decrypt(Array<UInt8>(hex: self)) {
+            return String(bytes: result, encoding: .utf8) ?? ""
+        } else {
+            return ""
+        }
         
-        return String(bytes: result, encoding: .utf8) ?? ""
+//        return String(bytes: result, encoding: .utf8) ?? ""
     }
 }
 

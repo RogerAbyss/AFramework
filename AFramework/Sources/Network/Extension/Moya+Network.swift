@@ -138,9 +138,12 @@ public extension Network {
                     validateCertificateChain: true,
                     validateHost: true
                 ),
-            "insecure.expired-apis.com": .disableEvaluation]
+            ]
             
-            log.debug("🚀 [SSL] 启用, 信任域名:\(SSLUtil.trustHost)")
+            log.debug("""
+                🚀 [SSL] 启用, 信任域名:\(SSLUtil.trustHost)
+                \(policies)
+                """)
             serverTrustPolicyManager = ServerTrustPolicyManager(policies: policies)
         }
         
