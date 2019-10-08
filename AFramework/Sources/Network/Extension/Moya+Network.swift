@@ -133,7 +133,12 @@ public extension Network {
         
         if SSLUtil.useSSL {
             let policies: [String: ServerTrustPolicy] = [
-                "\(SSLUtil.trustHost)": .pinCertificates(
+                "app.togcm.com": .pinCertificates(
+                    certificates: ServerTrustPolicy.certificates(),
+                    validateCertificateChain: true,
+                    validateHost: true
+                ),
+                "test.togcm.com": .pinCertificates(
                     certificates: ServerTrustPolicy.certificates(),
                     validateCertificateChain: true,
                     validateHost: true
