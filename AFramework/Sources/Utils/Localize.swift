@@ -15,6 +15,19 @@ public class LocalizeUtil {
         case kr
     }
     
+    static public func language() -> LocalizeUtil.LocalizeUtilLanguage {
+        switch Localize.currentLanguage() {
+        case "zh-Hans":
+            return .zh
+        case "en":
+            return .en
+        case "ko":
+            return .kr
+        default:
+            return .zh
+        }
+    }
+    
     static public func setup() {
         log.debug("🌐 当前使用语言: \(Localize.currentLanguage())")
     }
