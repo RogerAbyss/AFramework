@@ -16,10 +16,10 @@ public class Alert: NSObject {
      调用Alert
     */
     public class func showAlert(
-        buttons: Array<String> = ["确定"],
-        title: String = "提示",
+        buttons: Array<String> = ["AFrameworkNoteEnsure".localized()], //确定
+        title: String = "AFrameworkNoteNote".localized(), //提示
         message: String = "",
-        cancelName: String = "取消",
+        cancelName: String = "AFrameworkNoteCancel".localized(), // 取消
         _ vc: UIViewController = M.shared.nav!,
         event: @escaping EventTagCallback) {
         
@@ -47,8 +47,8 @@ public class Alert: NSObject {
     }
     
     public class func showAlertSimple(
-        cancelName: String = "确定",
-        title: String = "提示",
+        cancelName: String = "AFrameworkNoteEnsure".localized(), //确定
+        title: String = "AFrameworkNoteNote".localized(), //提示
         message: String,
         _ vc: UIViewController = M.shared.nav!) {
         
@@ -86,7 +86,8 @@ public class Alert: NSObject {
          添加按钮 - 照相
         */
         if(hasTakePhoto) {
-            action.addAction(UIAlertAction.init(title: "拍照", style:UIAlertAction.Style.default, handler: { (_) in
+            // 拍照
+            action.addAction(UIAlertAction.init(title: "AFrameworkNoteCamera".localized(), style:UIAlertAction.Style.default, handler: { (_) in
                 var config = YPImagePickerConfiguration()
                 config.screens = [.photo]
                 let picker = YPImagePicker(configuration: config)
@@ -113,7 +114,9 @@ public class Alert: NSObject {
         /**
          添加按钮 - 选择照片
          */
-        action.addAction(UIAlertAction.init(title: "选择照片", style:UIAlertAction.Style.default, handler: { (_) in
+        
+        // 选择照片
+        action.addAction(UIAlertAction.init(title: "AFrameworkNoteChoosePhoto".localized(), style:UIAlertAction.Style.default, handler: { (_) in
             var config = YPImagePickerConfiguration()
             config.screens = [.library]
             config.library.maxNumberOfItems = maxSelect
@@ -139,7 +142,8 @@ public class Alert: NSObject {
             vc.present(picker, animated: true, completion: nil)
         }))
         
-        action.addAction(UIAlertAction.init(title: "取消", style:UIAlertAction.Style.cancel, handler: nil))
+        // 取消
+        action.addAction(UIAlertAction.init(title: "AFrameworkNoteCancel".localized(), style:UIAlertAction.Style.cancel, handler: nil))
         vc.present(action, animated: true, completion: nil)
         
         return action
