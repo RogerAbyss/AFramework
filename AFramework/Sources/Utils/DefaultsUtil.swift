@@ -34,7 +34,15 @@ public class DefaultsUtil {
         if host.count > 0 {
             return host
         } else {
-            return PlistUtil.getStringValue("APP_HOST")
+            if LocalizeUtil.language() == .kr {
+                #if DEBUG
+                    return "http://47.74.144.109/drt"
+                #else
+                    return "http://47.74.144.109/drt"
+                #endif
+            } else {
+                return PlistUtil.getStringValue("APP_HOST")
+            }
         }
     }
 }
