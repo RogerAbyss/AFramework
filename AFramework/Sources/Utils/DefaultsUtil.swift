@@ -38,7 +38,7 @@ public class DefaultsUtil {
                 #if DEBUG
                     return "http://47.74.144.109/drt"
                 #else
-                    return "http://47.74.144.109/drt"
+                    return "https://korea.togcm.com"
                 #endif
             } else {
                 return PlistUtil.getStringValue("APP_HOST")
