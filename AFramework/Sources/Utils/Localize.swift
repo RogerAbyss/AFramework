@@ -12,6 +12,20 @@ public class LocalizeUtil {
     public enum LocalizeUtilLanguage {
         case zh
         case en
+        case kr
+    }
+    
+    static public func language() -> LocalizeUtil.LocalizeUtilLanguage {
+        switch Localize.currentLanguage() {
+        case "zh-Hans":
+            return .zh
+        case "en":
+            return .en
+        case "ko":
+            return .kr
+        default:
+            return .zh
+        }
     }
     
     static public func setup() {
@@ -27,6 +41,10 @@ public class LocalizeUtil {
         case .en:
             log.debug("🌐 切换英文")
             Localize.setCurrentLanguage("en")
+            break;
+        case .kr:
+            log.debug("🌐 切换韩文")
+            Localize.setCurrentLanguage("ko")
             break;
         }
     }

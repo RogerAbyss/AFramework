@@ -130,7 +130,7 @@ extension Refresher {
 
 public extension Refresher {
     static func setup() {
-        Refresher.setDefualtShouldEmptyBlock { _ in return (nil, "暂无数据", Assets.placeholder, nil) }
+        Refresher.setDefualtShouldEmptyBlock { _ in return (nil, "ios_no_moredata".localized(), Assets.placeholder, nil) }
         Refresher.setDefualtURLGenerator { (_, _) -> JSON in return JSON([:]) }
         Refresher.setDefualPreRequest { (_, _, _) -> Bool in return true }
         Refresher.setDefualPostRequest { (_, _, _) in }

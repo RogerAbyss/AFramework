@@ -19,6 +19,8 @@ public extension DefaultsKeys {
     static let appAccount = DefaultsKey<Bool>("__appAccount", defaultValue: false)
     /** 是否使用生物认证 */
     static let appBio = DefaultsKey<Bool>("__appBio", defaultValue: false)
+    /** uuid */
+    static let uuid = DefaultsKey<String>("__uuid", defaultValue: "")
 }
 
 public class DefaultsUtil {
@@ -32,7 +34,15 @@ public class DefaultsUtil {
         if host.count > 0 {
             return host
         } else {
-            return PlistUtil.getStringValue("APP_HOST")
+            if LocalizeUtil.language() == .kr {
+                #if DEBUG
+                    return "http://47.74.144.109/drt"
+                #else
+                    return "https://korea.togcm.com"
+                #endif
+            } else {
+                return PlistUtil.getStringValue("APP_HOST")
+            }
         }
     }
 }

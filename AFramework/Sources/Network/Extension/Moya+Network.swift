@@ -133,14 +133,22 @@ public extension Network {
         
         if SSLUtil.useSSL {
             let policies: [String: ServerTrustPolicy] = [
-                "\(SSLUtil.trustHost)": .pinCertificates(
+                "app.togcm.com": .pinCertificates(
                     certificates: ServerTrustPolicy.certificates(),
                     validateCertificateChain: true,
                     validateHost: true
                 ),
-            "insecure.expired-apis.com": .disableEvaluation]
+                "test.togcm.com": .pinCertificates(
+                    certificates: ServerTrustPolicy.certificates(),
+                    validateCertificateChain: true,
+                    validateHost: true
+                ),
+            ]
             
-            log.debug("🚀 [SSL] 启用, 信任域名:\(SSLUtil.trustHost)")
+            log.debug("""
+                🚀 [SSL] 启用, 信任域名:\(SSLUtil.trustHost)
+                \(policies)
+                """)
             serverTrustPolicyManager = ServerTrustPolicyManager(policies: policies)
         }
         

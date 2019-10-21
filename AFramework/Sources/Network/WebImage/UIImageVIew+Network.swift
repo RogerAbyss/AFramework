@@ -12,7 +12,7 @@ public extension UIImageView {
                          _ mockType: MockImageType = .avatar,
                          _ usePlaceHolder: Bool = true,
                          resize: CGSize = CGSize(width: 0, height: 0),
-                         processor: ImageProcessor = RoundCornerImageProcessor(cornerRadius: 0)) {
+                         processor: ImageProcessor = DefaultImageProcessor.default) {
         
         var url = url
         if M.shared.config.network.imagemock_enable {
@@ -30,7 +30,7 @@ public extension UIImageView {
         } else {
             size = self.size
         }
-
+        
         let resource: Resource? = WebImageUtil.processURL(url, size)
         
         self.kf.setImage(with: resource,

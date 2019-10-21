@@ -15,6 +15,7 @@ public extension Notification.Name {
     static let 用户信息更新 = Notification.Name("__notificationUserInfoUpdate")
     static let 分类更新 = Notification.Name("__notificationCategoryUpdate")
     static let 首页更新 = Notification.Name("__notificationHomeUpdate")
+    static let 首页倒计时更新 = Notification.Name("__notificationHomeTimeUpdate")
     
     
     static let 支付成功 = Notification.Name("__notificatioPaySuccess")

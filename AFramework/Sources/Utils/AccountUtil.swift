@@ -6,44 +6,55 @@
 //
 
 import SwiftyUserDefaults
+import SwiftyJSON
 
 public extension DefaultsKeys {
-    static let AccountList = DefaultsKey<Array<Dictionary<String,String>>>("__AccountList", defaultValue: [])
+    static let AccountListV2 = DefaultsKey<[UserProflie]>("__AccountListV2", defaultValue: [])
+}
+
+public class UserProflie: Codable, DefaultsSerializable {
+    public var mobile: String
+    public var password: String
+    public var lastTime: TimeInterval
+    public var name: String
+    
+    public init(mobile: String, password: String, name: String) {
+        self.mobile = mobile
+        self.password = password
+        self.lastTime = Date().timeIntervalSince1970
+        self.name = name
+    }
 }
 
 public class AccountUtil {
-    static public func save(mobile: String, password: String) {
-        var list = Defaults[.AccountList]
+    static public func save(mobile: String, password: String, name: String) {
+        var list = Defaults[.AccountListV2]
         
         /** 不添加重复账号, 但刷新时间 */
-        list = list.filter { $0["mobile"] != mobile }
+        list = list.filter { $0.mobile != mobile }
         
         list.append(
-            [
-                "mobile":mobile,
-                "password":password,
-                "time":"\(Int(Date().timeIntervalSince1970))"
-            ]
+            UserProflie(mobile: mobile, password: password, name: name)
         )
 
-        Defaults[.AccountList] = list
+        Defaults[.AccountListV2] = list
     }
     
     static public func remove(mobile: String) {
-        var list = Defaults[.AccountList]
+        var list = Defaults[.AccountListV2]
         
-        list = list.filter { $0["mobile"] != mobile }
+        list = list.filter { $0.mobile != mobile }
         
-        Defaults[.AccountList] = list
+        Defaults[.AccountListV2] = list
     }
     
-    static public func list() -> [Dictionary<String,String>] {
-        let list = Defaults[.AccountList]
+    static public func list() -> [UserProflie] {
+        let list = Defaults[.AccountListV2]
         
         return list
     }
     
     static public func removeAll() {
-        Defaults[.AccountList] = []
+        Defaults[.AccountListV2] = []
     }
 }

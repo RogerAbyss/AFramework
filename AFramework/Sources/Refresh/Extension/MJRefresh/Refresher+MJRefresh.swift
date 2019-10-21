@@ -29,14 +29,19 @@ public extension Refresher {
         (self.slave as! UIScrollView).mj_header = header
     }
     
-    func addFooter() {
+    func addFooter(_ footerContent: String = "AFrameworkFooterContent".localized()) {
         let footer = MJRefreshAutoNormalFooter(refreshingBlock: {  [unowned self] in
             log.debug("🌟 Refresher 开始刷新")
             self.requestData(byFooter: true)
         })
         
+        var f = "--- 没有更多内容啦 ---"
+        if footerContent.count > 0 {
+            f = footerContent
+        }
+        
         footer?.setTitle("", for: .idle)
-        footer?.setTitle("--- 没有更多内容啦 ---", for: .noMoreData)
+        footer?.setTitle(f, for: .noMoreData)
         footer?.setTitle("", for: .pulling)
         footer?.setTitle("", for: .refreshing)
         footer?.setTitle("", for: .willRefresh)

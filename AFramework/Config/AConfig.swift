@@ -16,6 +16,7 @@ public struct AConfig: Codable {
     public var share: ShareConfig
     public var mode: ModeConfig
     public var style: StyleConfig
+    public var test_accounts: [TestAccount]
     public var hosts: [NetworkHost]
     
     static public func load() -> AConfig {
@@ -80,6 +81,11 @@ public struct AConfig: Codable {
                     red: ""
                 )
             ),
+            test_accounts: [
+                TestAccount(name: "测试账号",
+                       mobile: "17723547371"
+                )
+            ],
             hosts: [
                 NetworkHost(
                     name: "服务器",
@@ -160,6 +166,11 @@ public struct NetworkConfig: Codable {
 public struct NetworkHost: Codable {
     public var name: String
     public var host: String
+}
+
+public struct TestAccount: Codable {
+    public var name: String
+    public var mobile: String
 }
 
 public struct SSLConfig: Codable {

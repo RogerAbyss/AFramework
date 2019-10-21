@@ -126,17 +126,3 @@ targets:
                 AppStore: 
                     DEBUG: NO
                     OTHER_SWIFT_FLAGS: "$(inherited)"
-
-    AFramework-Tests:
-        type: bundle.unit-test
-        platform: iOS
-        sources:
-            - AFramework/AFramework-Tests
-        dependencies:
-            - target: AFramework
-            - carthage: Quick
-            - carthage: Nimble
-        scheme:
-            testTargets:
-                - AFramework-Tests
-            gatherCoverageData: true
