@@ -8,7 +8,7 @@
 import Foundation
 
 public class Assets {
-    public static let placeholder = UIImage(named: "placeholder")!
+    public static let placeholder = LocalizeUtil.language() == .kr ? UIImage(named: "placeholder-ko")!:UIImage(named: "placeholder")!
     public static let startupIcon = UIImage(named: "startupIcon")!
     public static let close = UIImage(named: "close")!
     public static let save = UIImage(named: "save")!
