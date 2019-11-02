@@ -8,6 +8,7 @@
 import UIKit
 import IQKeyboardManagerSwift
 import SwiftyUserDefaults
+import AdSupport
 
 public class LauncherService {
     static public func setup() {
@@ -26,13 +27,19 @@ public class LauncherService {
         IQKeyboardManager.shared.enableAutoToolbar = false
     }
     
-    static func getUUID() {
+    @discardableResult
+    public static func getUUID() -> String {
         if Defaults[.uuid].count < 1 {
-            let uuid = UUID().uuidString
+            var uuid = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+            
+            if uuid.count < 1 {
+                uuid = UUID().uuidString
+            }
             
             Defaults[.uuid] = uuid
         }
         
         print("🌈 uuid: \(Defaults[.uuid])")
+        return Defaults[.uuid]
     }
 }
