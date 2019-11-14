@@ -36,14 +36,14 @@ public class CacheService {
         */
         let memoryConfig = MemoryConfig(
             expiry: .seconds(10*60 + 60*60*8),
-            countLimit: 50,
+            countLimit: 100,
             totalCostLimit: 0
         )
         
         let diskConfig = DiskConfig(
             name: PlistUtil.bundleIndentifier,
             expiry: .seconds(60*60 + 60*60*8),
-            maxSize: 1000,
+            maxSize: 20000,
             directory: try! FileManager.default.url(for: .documentDirectory,
                                                     in: .userDomainMask,
                                                     appropriateFor: nil,
