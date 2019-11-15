@@ -6,20 +6,32 @@
 //
 
 import Foundation
+import Lottie
 
 public extension UIView {
+    
+
+    static func welldone() -> AnimationView {
+        let loading = AnimationView()
+        let starAnimation = Animation.named("welldone")
+        loading.animation = starAnimation
+//        loading.loopMode = .playOnce
+        loading.loopMode = .loop
+        
+        return loading
+    }
     
     /**
       抖动动画
     */
-    func pulse() {
+    func pulse(_ value: Float = 1.2, _ min: Float = 0.8) {
         let pulse = CABasicAnimation(keyPath: "transform.scale")
         pulse.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         pulse.duration = 0.1
         pulse.repeatCount = 1
         pulse.autoreverses = true;
-        pulse.fromValue = NSNumber(value: 0.8)
-        pulse.toValue = NSNumber(value: 1.2)
+        pulse.fromValue = NSNumber(value: min)
+        pulse.toValue = NSNumber(value: value)
         
         self.layer.add(pulse, forKey:nil)
     }
