@@ -24,8 +24,10 @@ public class PlaceHolderView: UIView {
     public class func place(_ view: UIView!, _ imageName: String="") -> PlaceHolderView {
         let placeholder = PlaceHolderView(frame: CGRect.init(x: 0, y: 0, width: view.width, height: view.height))
         
-        var source_image = UIImage(named: imageName)
-        if imageName.count < 1 {
+        var source_image: UIImage?
+        if imageName.count > 1 {
+            source_image = UIImage(named: imageName)
+        } else {
             source_image = Assets.placeholder
         }
         
