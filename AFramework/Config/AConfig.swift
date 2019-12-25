@@ -42,7 +42,8 @@ public struct AConfig: Codable {
                 analysis: "",
                 baidu: "",
                 wepay: "",
-                scheme: ""
+                scheme: "",
+                applink: ""
             ),
             project: ProjectConfig(
                 start_time: 0,
@@ -140,6 +141,7 @@ public struct KeyConfig: Codable {
     public var baidu: String
     public var wepay: String
     public var scheme: String
+    public var applink: String
 }
 
 public struct ShareConfig: Codable {
