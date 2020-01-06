@@ -16,7 +16,7 @@ public class NotificationSercice {
     }
     
     public func send(name: Notification.Name, objct: Any?) {
-        DispatchQueue.global().async{
+        DispatchQueue.main.async {
             NotificationCenter.default.post(name: name,
                                             object: objct)
             
