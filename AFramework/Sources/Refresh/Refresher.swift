@@ -65,7 +65,7 @@ public class Refresher {
     public var postRequestBlock :RefreshPostRequest = defaultPostRequestBlock!
     
     deinit {
-        log.debug("🗑 refresher deinit")
+        log.debug("🗑 [回收] 列表")
         cancelable?.cancel()
     }
 }
