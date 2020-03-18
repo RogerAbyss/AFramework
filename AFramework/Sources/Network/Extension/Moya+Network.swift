@@ -61,18 +61,22 @@ open class Network<Target> where Target: NetworkTargetType {
 
         assistant.target = target
         
-        let cancellable = provider.request(target) { [unowned self] result in
+        let cancellable = provider.request(target) { [weak self] result in
+            if self == nil {
+                return
+            }
+            
             switch result {
             case let .success(response):
                 assistant.response = response
                 if 200..<400 ~= response.statusCode {
-                    self.process(target, assistant, successCallback, failCallback, response)
+                    self!.process(target, assistant, successCallback, failCallback, response)
                 } else {
                     errorCallback(assistant, MoyaError.statusCode(response))
                 }
                 break
             case let .failure(error):
-                if (self.retryDone(target, assistant, failCallback, errorCallback, successCallback)) {
+                if (self!.retryDone(target, assistant, failCallback, errorCallback, successCallback)) {
                     errorCallback(assistant, error)
                 }
                 break

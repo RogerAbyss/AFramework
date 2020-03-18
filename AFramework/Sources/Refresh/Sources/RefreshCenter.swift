@@ -84,7 +84,11 @@ extension Refresher {
             "a":self.api
             ])
         
-        self.plugins.forEach { [unowned self] in $0.willSend(refresher: self, byFooter: byFooter) }
+        self.plugins.forEach { [weak self] in
+            if self != nil {
+                 $0.willSend(refresher: self!, byFooter: byFooter)
+            }
+        }
         self.evidence.loading = true
         self.requestBlock(self, byFooter, params)
     }
@@ -119,7 +123,13 @@ extension Refresher {
             self.evidence.list.removeAll()
         }
         
-        netData.forEach { [unowned self] in self.evidence.list.append($0) }
+        netData.forEach { [weak self] in
+            if self == nil {
+                return
+            }
+            
+            self!.evidence.list.append($0)
+        }
         log.debug("🌟 Refresher 处理数据: 新增[\(netData.count)] 总共[\(self.evidence.list.count)]")
         
         self.postRequestBlock(self, byFooter, data)

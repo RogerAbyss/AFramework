@@ -92,7 +92,7 @@ public class Alert: NSObject {
                 config.screens = [.photo]
                 let picker = YPImagePicker(configuration: config)
                 
-                picker.didFinishPicking { [unowned picker] items, _ in
+                picker.didFinishPicking { [weak picker] items, _ in
                     if let photo = items.singlePhoto {
                         
                         if let data = photo.image.jpegData(compressionQuality: 0.4) {
@@ -104,7 +104,7 @@ public class Alert: NSObject {
                         }
                     }
                     
-                    picker.dismiss(animated: true, completion: nil)
+                    picker?.dismiss(animated: true, completion: nil)
                 }
                 
                 vc.present(picker, animated: true, completion: nil)
@@ -124,7 +124,7 @@ public class Alert: NSObject {
             
             let picker = YPImagePicker(configuration: config)
             
-            picker.didFinishPicking { [unowned picker] items, _ in
+            picker.didFinishPicking { [weak picker] items, _ in
                 if let photo = items.singlePhoto {
                     
                     if let data = photo.image.jpegData(compressionQuality: 0.4) {
@@ -136,7 +136,7 @@ public class Alert: NSObject {
                     }
                 }
                 
-                picker.dismiss(animated: true, completion: nil)
+                picker?.dismiss(animated: true, completion: nil)
             }
             
             vc.present(picker, animated: true, completion: nil)

@@ -10,10 +10,10 @@ import SwifterSwift
 
 public extension Refresher {
     func addHeader() {
-        let header = MJRefreshNormalHeader(refreshingBlock: { [unowned self] in
+        let header = MJRefreshNormalHeader(refreshingBlock: { [weak self] in
             log.debug("🌟 Refresher 开始刷新")
             
-            self.requestData(byFooter: false)
+            self?.requestData(byFooter: false)
         })
         
         header?.setTitle("", for: .idle)
@@ -30,9 +30,9 @@ public extension Refresher {
     }
     
     func addFooter(_ footerContent: String = "AFrameworkFooterContent".localized()) {
-        let footer = MJRefreshAutoNormalFooter(refreshingBlock: {  [unowned self] in
+        let footer = MJRefreshAutoNormalFooter(refreshingBlock: {  [weak self] in
             log.debug("🌟 Refresher 开始刷新")
-            self.requestData(byFooter: true)
+            self?.requestData(byFooter: true)
         })
         
         var f = "--- 没有更多内容啦 ---"

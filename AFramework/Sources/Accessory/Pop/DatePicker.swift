@@ -71,15 +71,15 @@ open class DatePicker: NSObject {
                 let datePicker = datePickerManager.datePicker!
                 datePicker.datePickerMode = .date
                 
-                datePicker.selectedDate = { [unowned self](date) in
+                datePicker.selectedDate = { [weak self](date) in
                     
                     if tag == 0 {
-                        self.startDate = date
+                        self?.startDate = date
                     } else if tag == 1 {
-                        self.endDate = date
+                        self?.endDate = date
                     }
                     
-                    self.showFilterDatePicker(done: done)
+                    self?.showFilterDatePicker(done: done)
                 }
                 
                 
