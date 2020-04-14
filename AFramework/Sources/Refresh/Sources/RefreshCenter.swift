@@ -56,7 +56,7 @@ extension Refresher {
         
         if byFooter&&self.evidence.done {
             if slave.isKind(of: UIScrollView.classForCoder()) {
-                (slave as! UIScrollView).mj_footer.endRefreshing()
+                (slave as! UIScrollView).mj_footer?.endRefreshing()
             }
             
             log.debug("🌟 数据已经加载完毕, 请不要重复加载")

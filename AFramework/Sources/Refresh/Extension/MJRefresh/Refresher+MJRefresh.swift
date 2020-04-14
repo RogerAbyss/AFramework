@@ -16,15 +16,15 @@ public extension Refresher {
             self?.requestData(byFooter: false)
         })
         
-        header?.setTitle("", for: .idle)
-        header?.setTitle("", for: .noMoreData)
-        header?.setTitle("", for: .pulling)
-        header?.setTitle("", for: .refreshing)
-        header?.setTitle("", for: .willRefresh)
-        header?.lastUpdatedTimeLabel.text = ""
-        header?.lastUpdatedTimeText = { _ in return "" }
-        header?.labelLeftInset = 0
-        header?.ignoredScrollViewContentInsetTop = 10
+        header.setTitle("", for: .idle)
+        header.setTitle("", for: .noMoreData)
+        header.setTitle("", for: .pulling)
+        header.setTitle("", for: .refreshing)
+        header.setTitle("", for: .willRefresh)
+        header.lastUpdatedTimeLabel?.text = ""
+        header.lastUpdatedTimeText = { _ in return "" }
+        header.labelLeftInset = 0
+        header.ignoredScrollViewContentInsetTop = 10
         
         (self.slave as! UIScrollView).mj_header = header
     }
@@ -40,13 +40,13 @@ public extension Refresher {
             f = footerContent
         }
         
-        footer?.setTitle("", for: .idle)
-        footer?.setTitle(f, for: .noMoreData)
-        footer?.setTitle("", for: .pulling)
-        footer?.setTitle("", for: .refreshing)
-        footer?.setTitle("", for: .willRefresh)
-        footer?.labelLeftInset = 0
-        footer?.stateLabel.textColor = Color(hexString: "dddddd")
+        footer.setTitle("", for: .idle)
+        footer.setTitle(f, for: .noMoreData)
+        footer.setTitle("", for: .pulling)
+        footer.setTitle("", for: .refreshing)
+        footer.setTitle("", for: .willRefresh)
+        footer.labelLeftInset = 0
+        footer.stateLabel?.textColor = Color(hexString: "dddddd")
         
         (self.slave as! UIScrollView).mj_footer = footer
     }
