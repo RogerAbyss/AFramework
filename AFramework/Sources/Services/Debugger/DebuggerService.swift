@@ -48,9 +48,9 @@ public class DebuggerService {
                     cancelButton: "取消",
                     items: list,
                     vc: M.shared.nav!.viewControllers.last!) { (sheet, item) in
-                    if item is ActionSheetOkButton {
+                    if item is OkButton {
                         
-                    } else if item is ActionSheetCancelButton {
+                    } else if item is CancelButton {
                         sheet.dismiss()
                     } else {
                         let tag = item.value as! Int

@@ -29,6 +29,10 @@ public extension Refresher {
         (self.slave as! UIScrollView).mj_header = header
     }
     
+    func requestApi(_ byFooter: Bool = true) {
+        requestData(byFooter: byFooter)
+    }
+    
     func addFooter(_ footerContent: String = "AFrameworkFooterContent".localized()) {
         let footer = MJRefreshAutoNormalFooter(refreshingBlock: {  [weak self] in
             log.debug("🌟 Refresher 开始刷新")

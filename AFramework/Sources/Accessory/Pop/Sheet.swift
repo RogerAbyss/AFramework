@@ -12,7 +12,7 @@ import PGDatePicker
 
 public class Sheet: NSObject {
     
-     public typealias SelectAction = (ActionSheet, ActionSheetItem) -> ()
+     public typealias SelectAction = (ActionSheet, MenuItem) -> ()
     
     /**
      调用Sheet
@@ -25,9 +25,9 @@ public class Sheet: NSObject {
                          items: [["name":"1"],
                                  ["name":"2"]],
                          vc: self) { (sheet, item) in
-                            if item is ActionSheetOkButton {
+                            if item is OkButton {
                                 
-                            } else if item is ActionSheetCancelButton {
+                            } else if item is CancelButton {
                                 sheet.dismiss()
                             } else {
                                 let tag = item.value as! Int
@@ -47,31 +47,32 @@ public class Sheet: NSObject {
                          event: @escaping SelectAction)
         -> ActionSheet
     {
-        var list = Array<ActionSheetItem>()
+        var list = Array<MenuItem>()
         
         if title.count > 0 {
-            list.append(ActionSheetTitle(title: title))
+            list.append(MenuTitle(title: title))
         }
         
         
         var tag = 0
         items.forEach { (item) in
             if let name = item[nameKey] {
-                list.append(ActionSheetItem(title: name, value: tag, image: nil))
+                list.append(MenuItem(title: name, value: tag, image: nil))
             }
             tag = tag + 1
         }
         
         if okButton.count > 0 {
-            list.append(ActionSheetOkButton(title: okButton))
+            list.append(OkButton(title: okButton))
         }
         
         if cancelButton.count > 0 {
-            list.append(ActionSheetCancelButton(title: cancelButton))
+            list.append(CancelButton(title: cancelButton))
         }
+        
+        let menu = Menu(items: list)
     
-
-        let sheet = ActionSheet(items: list) { sheet, item in
+        let sheet = ActionSheet(menu: menu) { sheet, item in
             event(sheet, item)
         }
         

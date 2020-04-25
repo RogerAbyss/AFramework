@@ -31,32 +31,33 @@ open class DatePicker: NSObject {
     
     public func showFilterDatePicker(done: @escaping DatePickerDone) {
         
-        var items = Array<ActionSheetItem>()
-        items.append(ActionSheetTitle(title: "选择筛选日期"))
+        var items = Array<MenuItem>()
+        items.append(MenuTitle(title: "选择筛选日期"))
         
         if let date = startDate  {
-            items.append(ActionSheetItem(title: "选择开始日期 \(date.display())", value: 0, image: nil))
+            items.append(MenuItem(title: "选择开始日期 \(date.display())", value: 0, image: nil))
         } else {
-            items.append(ActionSheetItem(title: "选择开始日期", value: 0, image: nil))
+            items.append(MenuItem(title: "选择开始日期", value: 0, image: nil))
         }
         
         if let date = endDate  {
-            items.append(ActionSheetItem(title: "选择结束日期 \(date.display())", value: 1, image: nil))
+            items.append(MenuItem(title: "选择结束日期 \(date.display())", value: 1, image: nil))
         } else {
-            items.append(ActionSheetItem(title: "选择结束日期", value: 1, image: nil))
+            items.append(MenuItem(title: "选择结束日期", value: 1, image: nil))
         }
         
-        items.append(ActionSheetOkButton(title: "确定"))
-        items.append(ActionSheetCancelButton(title: "取消"))
+        items.append(OkButton(title: "确定"))
+        items.append(CancelButton(title: "取消"))
         
-        let sheet = ActionSheet(items: items) { (sheet, item) in
-            if item is ActionSheetOkButton {
+        let menu = Menu(items: items)
+        let sheet = ActionSheet(menu: menu) { (sheet, item) in
+            if item is OkButton {
                 if let start = self.startDate, let end = self.endDate {
                     done(start, end)
                 } else {
                     Hud.show(type: .info, text: "请选择开始和结束时间")
                 }
-            } else if item is ActionSheetCancelButton {
+            } else if item is CancelButton {
                 sheet.dismiss()
             } else {
                 let tag = item.value as! Int
