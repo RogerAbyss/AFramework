@@ -48,7 +48,7 @@ public extension Refresher {
     }
 }
 
-extension Refresher {
+public extension Refresher {
     func requestData(byFooter: Bool) {
         guard self.api.count > 0 else { log.info("🌟 api为空, 不刷新"); return }
         guard !self.evidence.loading else { log.info("🌟 加载中"); return }
