@@ -21,4 +21,6 @@ public extension Notification.Name {
     static let 支付成功 = Notification.Name("__notificatioPaySuccess")
     static let 支付失败 = Notification.Name("__notificatioPayFail")
     static let 发现更新 = Notification.Name("__notificationNeedUpdate")
+    
+    static let 定位更新 = Notification.Name("__notificationLocationUpdate")
 }
