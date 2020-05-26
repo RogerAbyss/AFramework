@@ -21,6 +21,12 @@ public extension DefaultsKeys {
     static let appBio = DefaultsKey<Bool>("__appBio", defaultValue: false)
     /** uuid */
     static let uuid = DefaultsKey<String>("__uuid", defaultValue: "")
+    /** 网络模式
+        none
+         wifi
+            3g
+     */
+    static let nw = DefaultsKey<String>("__nw", defaultValue: "unknown")
 }
 
 public class DefaultsUtil {

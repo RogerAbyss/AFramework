@@ -7,6 +7,8 @@
 
 import UIKit
 import Reachability
+import SwiftyUserDefaults
+import CoreTelephony
 
 public class NetMonitorService {
     
@@ -19,10 +21,31 @@ public class NetMonitorService {
             
             if reachability.connection == .wifi {
                 log.debug("📶 网络变化: 使用WIFI")
+                Defaults[.nw] = "wifi"
             } else {
-                log.debug("📶 网络变化: 使用流量")
+                let info = CTTelephonyNetworkInfo()
+                if info.subscriberCellularProvider != nil {
+                    let currentRadioTech = info.currentRadioAccessTechnology!
+                    
+                    var networkType = "unknown"
+                    switch currentRadioTech {
+                    case CTRadioAccessTechnologyGPRS,CTRadioAccessTechnologyEdge,CTRadioAccessTechnologyCDMA1x:
+                        networkType = "2G"
+                    case CTRadioAccessTechnologyeHRPD,CTRadioAccessTechnologyHSDPA,CTRadioAccessTechnologyCDMAEVDORev0,CTRadioAccessTechnologyCDMAEVDORevA,CTRadioAccessTechnologyCDMAEVDORevB,CTRadioAccessTechnologyHSUPA:
+                        networkType = "3G"
+                    case CTRadioAccessTechnologyLTE:
+                        networkType = "4G"
+                    default:
+                        break
+                    }
+                    
+                    Defaults[.nw] = networkType
+                    
+                    log.debug("📶 网络变化: 使用流量[\(networkType)]")
+                }
             }
         }
+        
         NetMonitorService.shared.whenUnreachable = { _ in
             log.debug("📶 网络变化: 没有网络")
         }
