@@ -40,7 +40,7 @@ public extension Refresher {
         })
         
         var f = "--- 没有更多内容啦 ---"
-        if footerContent.count > 0 {
+        if footerContent.count > 0 && footerContent != "AFrameworkFooterContent" {
             f = footerContent
         }
         
