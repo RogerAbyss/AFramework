@@ -23,26 +23,28 @@ public class NetMonitorService {
                 log.debug("📶 网络变化: 使用WIFI")
                 Defaults[.nw] = "wifi"
             } else {
-                let info = CTTelephonyNetworkInfo()
-                if info.subscriberCellularProvider != nil {
-                    let currentRadioTech = info.currentRadioAccessTechnology!
-                    
-                    var networkType = "unknown"
-                    switch currentRadioTech {
-                    case CTRadioAccessTechnologyGPRS,CTRadioAccessTechnologyEdge,CTRadioAccessTechnologyCDMA1x:
-                        networkType = "2G"
-                    case CTRadioAccessTechnologyeHRPD,CTRadioAccessTechnologyHSDPA,CTRadioAccessTechnologyCDMAEVDORev0,CTRadioAccessTechnologyCDMAEVDORevA,CTRadioAccessTechnologyCDMAEVDORevB,CTRadioAccessTechnologyHSUPA:
-                        networkType = "3G"
-                    case CTRadioAccessTechnologyLTE:
-                        networkType = "4G"
-                    default:
-                        break
-                    }
-                    
-                    Defaults[.nw] = networkType
-                    
-                    log.debug("📶 网络变化: 使用流量[\(networkType)]")
-                }
+                var networkType = "unknown"
+                
+                // 网络闪退
+//                let info = CTTelephonyNetworkInfo()
+//
+//                if info.subscriberCellularProvider != nil {
+//                    if let currentRadioTech = info.currentRadioAccessTechnology {
+//                        switch currentRadioTech {
+//                        case CTRadioAccessTechnologyGPRS,CTRadioAccessTechnologyEdge,CTRadioAccessTechnologyCDMA1x:
+//                            networkType = "2G"
+//                        case CTRadioAccessTechnologyeHRPD,CTRadioAccessTechnologyHSDPA,CTRadioAccessTechnologyCDMAEVDORev0,CTRadioAccessTechnologyCDMAEVDORevA,CTRadioAccessTechnologyCDMAEVDORevB,CTRadioAccessTechnologyHSUPA:
+//                            networkType = "3G"
+//                        case CTRadioAccessTechnologyLTE:
+//                            networkType = "4G"
+//                        default:
+//                            break
+//                        }
+//                    }
+//                }
+                
+                Defaults[.nw] = networkType
+                log.debug("📶 网络变化: 使用流量[\(networkType)]")
             }
         }
         
