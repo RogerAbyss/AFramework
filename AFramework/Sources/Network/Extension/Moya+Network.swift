@@ -134,20 +134,21 @@ public extension Network {
         configuration.httpAdditionalHeaders = Manager.defaultHTTPHeaders
         
         var serverTrustPolicyManager: ServerTrustPolicyManager?
-        
+                
         if SSLUtil.useSSL {
-            let policies: [String: ServerTrustPolicy] = [
-                "app.togcm.com": .pinCertificates(
-                    certificates: ServerTrustPolicy.certificates(),
-                    validateCertificateChain: true,
-                    validateHost: true
-                ),
-                "test.togcm.com": .pinCertificates(
-                    certificates: ServerTrustPolicy.certificates(),
-                    validateCertificateChain: true,
-                    validateHost: true
-                ),
-            ]
+            let policies: [String: ServerTrustPolicy] = M.shared.policies
+//            let policies: [String: ServerTrustPolicy] = [
+//                "app.togcm.com": .pinCertificates(
+//                    certificates: ServerTrustPolicy.certificates(),
+//                    validateCertificateChain: true,
+//                    validateHost: true
+//                ),
+//                "test.togcm.com": .pinCertificates(
+//                    certificates: ServerTrustPolicy.certificates(),
+//                    validateCertificateChain: true,
+//                    validateHost: true
+//                ),
+//            ]
             
             log.debug("""
                 🚀 [SSL] 启用, 信任域名:\(SSLUtil.trustHost)
@@ -155,7 +156,7 @@ public extension Network {
                 """)
             serverTrustPolicyManager = ServerTrustPolicyManager(policies: policies)
         }
-        
+                
         let manager = Manager.init(configuration: configuration, delegate: SessionDelegate(), serverTrustPolicyManager: serverTrustPolicyManager)
         
         manager.startRequestsImmediately = false
