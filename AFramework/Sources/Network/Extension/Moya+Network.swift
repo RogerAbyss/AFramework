@@ -21,7 +21,7 @@ open class Network<Target> where Target: NetworkTargetType {
     public init(endpointClosure: @escaping MoyaProvider<Target>.EndpointClosure = NetworkEndpoint,
          requestClosure: @escaping MoyaProvider<Target>.RequestClosure = NetworkRequest,
          stubClosure: @escaping MoyaProvider<Target>.StubClosure = MoyaProvider.neverStub,
-         manager: Manager = NetworkManager(),
+         session: Session = NetworkSession(),
 
          plugins: [PluginType] = M.shared.plugins([
         NetworkPluginCache(),
@@ -46,7 +46,7 @@ open class Network<Target> where Target: NetworkTargetType {
         self.provider = MoyaProvider(endpointClosure: endpointClosure,
                                      requestClosure: requestClosure,
                                      stubClosure: stubCustom,
-                                     manager: manager,
+                                     session: session,
                                      plugins: plugins,
                                      trackInflights: trackInflights)
     }
@@ -129,38 +129,31 @@ open class Network<Target> where Target: NetworkTargetType {
 
 
 public extension Network {
-    class func NetworkManager() -> Manager {
+    class func NetworkSession() -> Session {
         let configuration = URLSessionConfiguration.default
-        configuration.httpAdditionalHeaders = Manager.defaultHTTPHeaders
+        configuration.headers = .default
         
-        var serverTrustPolicyManager: ServerTrustPolicyManager?
-                
         if SSLUtil.useSSL {
-            let policies: [String: ServerTrustPolicy] = M.shared.policies
-//            let policies: [String: ServerTrustPolicy] = [
-//                "app.togcm.com": .pinCertificates(
-//                    certificates: ServerTrustPolicy.certificates(),
-//                    validateCertificateChain: true,
-//                    validateHost: true
-//                ),
-//                "test.togcm.com": .pinCertificates(
-//                    certificates: ServerTrustPolicy.certificates(),
-//                    validateCertificateChain: true,
-//                    validateHost: true
-//                ),
-//            ]
-            
+//            let serverTrustManager = ServerTrustManager(evaluators: ["example.com": PinnedCertificatesTrustEvaluator()])
+            let policies: [String: ServerTrustEvaluating] = M.shared.policies
             log.debug("""
-                🚀 [SSL] 启用, 信任域名:\(SSLUtil.trustHost)
+                🚀 [SSL] 启用, 信任域名:\(policies)
                 \(policies)
                 """)
-            serverTrustPolicyManager = ServerTrustPolicyManager(policies: policies)
+            let serverTrustManager = ServerTrustManager(evaluators: policies)
+            
+            return Session(
+                configuration: configuration,
+                startRequestsImmediately: false,
+                serverTrustManager: serverTrustManager
+            )
         }
-                
-        let manager = Manager.init(configuration: configuration, delegate: SessionDelegate(), serverTrustPolicyManager: serverTrustPolicyManager)
+            
         
-        manager.startRequestsImmediately = false
-        return manager
+        return Session(
+            configuration: configuration,
+            startRequestsImmediately: false
+        )
     }
     
     class func NetworkEndpoint(for target: Target) -> Endpoint {

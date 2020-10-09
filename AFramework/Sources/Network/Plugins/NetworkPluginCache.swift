@@ -6,7 +6,7 @@
 //
 
 import Moya
-import Result
+//import Result
 import SwiftyJSON
 
 final public class NetworkPluginCache: PluginType {

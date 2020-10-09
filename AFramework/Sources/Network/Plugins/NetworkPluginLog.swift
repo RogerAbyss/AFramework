@@ -7,7 +7,7 @@
 
 import Moya
 import SwiftyJSON
-import Result
+//import Result
 
 final public class NetworkPluginLog: PluginType {
     fileprivate var logHeader: Bool = true

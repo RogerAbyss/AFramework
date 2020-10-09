@@ -28,7 +28,7 @@ final public class ManagerService {
     public typealias EventNetworkPluginCallback = (_ plugins: [PluginType]) -> [PluginType]
     
     // 请在最开始调用, 第一次请求后此设置失效
-    public var policies: [String: ServerTrustPolicy] = [:]
+    public var policies: [String: ServerTrustEvaluating] = [:]
     
     private init() {}
 }
