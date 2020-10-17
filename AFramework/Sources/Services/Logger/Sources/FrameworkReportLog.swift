@@ -70,6 +70,8 @@ class FrameworkReportLog: NSObject {
         🍬 Touch
         ☠️ Skeleton
 
+        🖥 HUD
+
         Platform: ⌚️ 📱 💻 🖥
         ----------------------------
         """)

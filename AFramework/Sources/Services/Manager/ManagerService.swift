@@ -21,7 +21,7 @@ final public class ManagerService {
     
     static public let shared = ManagerService()
     public var config: AConfig = AConfig.load()
-    public var netStatu: Reachability.Connection = .none
+    public var netStatu: Reachability.Connection = .unavailable
     public var home: UIViewController?
     public var nav: UINavigationController?
     public var plugins: EventNetworkPluginCallback!

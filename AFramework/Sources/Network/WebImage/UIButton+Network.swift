@@ -37,7 +37,6 @@ public extension UIButton {
                          placeholder: usePlaceHolder ? PlaceHolderView.place(self).icon.image : nil,
                          options: [
                             .processor(processor),
-                            //                                .keepCurrentImageWhileLoading,
                             .targetCache(CacheService.default.imageCache!),
                             .transition(.fade(0.4)),
                             .requestModifier(modifier)

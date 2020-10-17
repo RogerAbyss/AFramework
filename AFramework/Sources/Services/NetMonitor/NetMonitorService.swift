@@ -8,11 +8,10 @@
 import UIKit
 import Reachability
 import SwiftyUserDefaults
-import CoreTelephony
 
 public class NetMonitorService {
     
-    static public var shared = Reachability()!
+    static public var shared = try! Reachability()
     static public func setup() {
         
         NetMonitorService.shared.whenReachable = { reachability in
